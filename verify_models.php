@@ -1,43 +1,36 @@
 <?php
 
 use App\Models\User;
-use App\Models\Team;
 use App\Models\Project;
-use App\Models\Task;
+use App\Models\TeamMember;
 
 // Create a user
 $user = User::factory()->create();
 
-// Create a team owned by user
-$team = Team::create([
-    'name' => 'Test Team',
-    'slug' => 'test-team',
-    'owner_id' => $user->id,
-]);
-
-// Add user to team
-$team->members()->attach($user, ['role' => 'owner']);
-
-// Create a project in team
+// Create a project owned by user
 $project = Project::create([
-    'name' => 'Test Project',
-    'team_id' => $team->id,
+    'title' => 'Test Project',
+    'slug' => 'test-project-' . uniqid(),
+    'description' => 'This is a test project',
+    'tech_stack' => 'PHP, Laravel, MySQL',
+    'image' => 'test-image.jpg',
+    'url' => 'https://test-project.com',
+    'featured' => true,
+    'user_id' => $user->id,
 ]);
 
-// Create a task in project assigned to user
-$task = Task::create([
-    'name' => 'Test Task',
+// Create a team member for the project
+$member = TeamMember::create([
     'project_id' => $project->id,
-    'assigned_to' => $user->id,
+    'name' => 'John Doe',
+    'role' => 'Developer',
+    'bio' => 'Full stack developer',
+    'social_links' => ['twitter' => '@johndoe', 'github' => 'johndoe'],
 ]);
 
 echo "User created: " . $user->name . "\n";
-echo "Team created: " . $team->name . "\n";
-echo "Project created: " . $project->name . "\n";
-echo "Task created: " . $task->name . "\n";
+echo "Project created: " . $project->title . "\n";
+echo "Team Member created: " . $member->name . "\n";
 
-echo "User teams count: " . $user->teams->count() . "\n";
-echo "Team members count: " . $team->members->count() . "\n";
-echo "Team projects count: " . $team->projects->count() . "\n";
-echo "Project tasks count: " . $project->tasks->count() . "\n";
-echo "Task assignee: " . $task->assignee->name . "\n";
+echo "Project team members count: " . $project->teamMembers->count() . "\n";
+echo "Team member project: " . $member->project->title . "\n";

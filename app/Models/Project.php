@@ -10,19 +10,20 @@ class Project extends Model
     /** @use HasFactory<\Database\Factories\ProjectFactory> */
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'team_id', 'status', 'due_date'];
+    protected $fillable = ['title', 'slug', 'description', 'tech_stack', 'image', 'url', 'featured'];
 
     protected $casts = [
-        'due_date' => 'date',
+        'featured' => 'boolean',
     ];
 
-    public function team()
+    public function user()
     {
-        return $this->belongsTo(Team::class);
+        return $this->belongsTo(User::class);
     }
 
-    public function tasks()
+    public function teamMembers()
     {
-        return $this->hasMany(Task::class);
+        return $this->hasMany(TeamMember::class);
     }
+
 }
