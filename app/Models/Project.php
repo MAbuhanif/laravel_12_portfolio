@@ -10,7 +10,7 @@ class Project extends Model
     /** @use HasFactory<\Database\Factories\ProjectFactory> */
     use HasFactory;
 
-    protected $fillable = ['title', 'slug', 'description', 'tech_stack', 'image', 'url', 'featured'];
+    protected $fillable = ['user_id', 'title', 'slug', 'description', 'tech_stack', 'image', 'url', 'featured'];
 
     protected $casts = [
         'featured' => 'boolean',

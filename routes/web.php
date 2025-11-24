@@ -14,7 +14,10 @@ Route::get('/about', function () {
 })->name('about');
 
 Route::get('/projects', function () {
-    return Inertia::render('Projects');
+    $projects = \App\Models\Project::with(['user', 'teamMembers'])->get();
+    return Inertia::render('Projects', [
+        'projects' => $projects,
+    ]);
 })->name('projects');
 
 Route::get('/contact', function () {
@@ -29,6 +32,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
+    // Project management routes
+    Route::resource('projects', \App\Http\Controllers\ProjectController::class)->except(['index', 'show']);
+    
+    // Team member management routes
+    Route::resource('team-members', \App\Http\Controllers\TeamMemberController::class);
 });
 
 require __DIR__.'/auth.php';
