@@ -1,9 +1,10 @@
-import { Head, useForm } from '@inertiajs/react';
+import { Head, useForm, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 import MainLayout from '@/Layouts/MainLayout';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 
-export default function Projects({ auth, projects = [] }) {
+export default function Projects({ projects = [] }) {
+    const { auth } = usePage().props;
     const [showProjectForm, setShowProjectForm] = useState(false);
     const [editingProject, setEditingProject] = useState(null);
     const [selectedProject, setSelectedProject] = useState(null);
