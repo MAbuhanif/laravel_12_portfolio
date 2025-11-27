@@ -20,7 +20,7 @@ class TeamMemberController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Admin/TeamMembers/Create');
     }
 
     /**
@@ -29,7 +29,7 @@ class TeamMemberController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'project_id' => 'required|exists:projects,id',
+            'project_id' => 'nullable|exists:projects,id',
             'name' => 'required|string|max:255',
             'role' => 'required|string|max:255',
             'image' => 'nullable|string',
@@ -37,7 +37,9 @@ class TeamMemberController extends Controller
             'social_links' => 'nullable|array',
         ]);
 
-        return TeamMember::create($validated);
+        TeamMember::create($validated);
+
+        return redirect()->route('team-members.index')->with('success', 'Team member created successfully.');
     }
 
     /**
