@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from '@inertiajs/react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 
-export default function Navbar() {
+export default function Navbar({ auth }) {
     const [isOpen, setIsOpen] = useState(false);
 
     const navLinks = [
@@ -42,6 +42,14 @@ export default function Navbar() {
                         >
                             Let's Talk
                         </Link>
+                        {auth.user && auth.user.is_admin && (
+                            <Link
+                                href={route('admin.dashboard')}
+                                className="text-gray-300 hover:text-primary-400 font-medium transition-colors duration-200 text-sm uppercase tracking-wider"
+                            >
+                                Dashboard
+                            </Link>
+                        )}
                     </div>
 
                     {/* Mobile Menu Button */}

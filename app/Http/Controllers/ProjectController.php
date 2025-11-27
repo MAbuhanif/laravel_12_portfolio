@@ -20,7 +20,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Admin/Projects/Create');
     }
 
     /**
@@ -38,7 +38,9 @@ class ProjectController extends Controller
             'featured' => 'boolean',
         ]);
 
-        return $request->user()->projects()->create($validated);
+        $request->user()->projects()->create($validated);
+
+        return redirect()->route('projects.index')->with('success', 'Project created successfully.');
     }
 
     /**

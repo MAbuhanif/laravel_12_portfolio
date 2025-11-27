@@ -41,6 +41,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
     Route::middleware('admin')->group(function () {
+        Route::get('/admin/dashboard', function () {
+            return Inertia::render('Admin/Dashboard');
+        })->name('admin.dashboard');
+
         // Project management routes
         Route::resource('projects', \App\Http\Controllers\ProjectController::class)->except(['index', 'show']);
         
