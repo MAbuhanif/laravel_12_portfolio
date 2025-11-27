@@ -13,6 +13,10 @@ Route::get('/about', function () {
     return Inertia::render('About');
 })->name('about');
 
+Route::get('/services', function () {
+    return Inertia::render('Services');
+})->name('services');
+
 Route::get('/projects', function () {
     $projects = \App\Models\Project::with(['user', 'teamMembers'])->get();
     return Inertia::render('Projects', [

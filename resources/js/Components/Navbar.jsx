@@ -7,6 +7,7 @@ export default function Navbar() {
 
     const navLinks = [
         { name: 'Home', href: '/' },
+        { name: 'Services', href: '/services' },
         { name: 'About', href: '/about' },
         { name: 'Projects', href: '/projects' },
         { name: 'Contact', href: '/contact' },
@@ -19,7 +20,7 @@ export default function Navbar() {
                     <div className="flex items-center">
                         <Link href="/" className="flex-shrink-0 flex items-center">
                             <span className="text-2xl font-heading font-bold text-white tracking-tight">
-                                Portfolio<span className="text-primary-500">.</span>
+                                Abyssinya<span className="text-primary-500">.</span>
                             </span>
                         </Link>
                     </div>

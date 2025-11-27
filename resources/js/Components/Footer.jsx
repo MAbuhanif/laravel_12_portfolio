@@ -7,17 +7,17 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div>
                         <span className="text-2xl font-heading font-bold text-white tracking-tight">
-                            Portfolio<span className="text-primary-500">.</span>
+                            Abyssinya<span className="text-primary-500">.</span>
                         </span>
                         <p className="mt-4 text-gray-400 text-sm leading-relaxed max-w-xs">
-                            Crafting digital experiences with passion and precision. Let's build something amazing together.
+                            Abyssinya is a digital agency that creates seamless digital experiences.
                         </p>
                     </div>
                     
                     <div>
                         <h3 className="text-white font-semibold mb-4">Quick Links</h3>
                         <ul className="space-y-2">
-                            <li><Link href="/about" className="text-gray-400 hover:text-primary-400 transition-colors text-sm">About Me</Link></li>
+                            <li><Link href="/about" className="text-gray-400 hover:text-primary-400 transition-colors text-sm">About Us</Link></li>
                             <li><Link href="/projects" className="text-gray-400 hover:text-primary-400 transition-colors text-sm">Projects</Link></li>
                             <li><Link href="/contact" className="text-gray-400 hover:text-primary-400 transition-colors text-sm">Contact</Link></li>
                         </ul>
@@ -39,7 +39,7 @@ export default function Footer() {
                     </div>
                 </div>
                 <div className="mt-12 pt-8 border-t border-dark-border text-center text-gray-500 text-sm">
-                    &copy; {new Date().getFullYear()} Portfolio. All rights reserved.
+                    &copy; {new Date().getFullYear()} Abyssinya. All rights reserved.
                 </div>
             </div>
         </footer>
