@@ -12,7 +12,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return Project::with('user', 'teamMembers')->get();
+        return \Inertia\Inertia::render('Admin/Projects/Index', [
+            'projects' => Project::with('user', 'teamMembers')->get()
+        ]);
     }
 
     /**

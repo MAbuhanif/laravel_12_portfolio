@@ -46,7 +46,7 @@ Route::middleware('auth')->group(function () {
         })->name('admin.dashboard');
 
         // Project management routes
-        Route::resource('projects', \App\Http\Controllers\ProjectController::class)->except(['index', 'show']);
+        Route::resource('projects', \App\Http\Controllers\ProjectController::class)->except(['show']);
         
         // Team member management routes
         Route::resource('team-members', \App\Http\Controllers\TeamMemberController::class);

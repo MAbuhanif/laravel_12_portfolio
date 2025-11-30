@@ -104,15 +104,20 @@ heroku run php artisan migrate --force
 ## Step 8: Create Admin User (Optional)
 
 ```bash
-heroku run php artisan tinker
+heroku run php artisan db:seed --class=AdminUserSeeder
 ```
 
+Alternatively, you can use `tinker` manually:
+```bash
+heroku run php artisan tinker
+```
 In the tinker shell:
 ```php
 User::create([
     'name' => 'Admin',
     'email' => 'admin@example.com',
-    'password' => bcrypt('your-secure-password')
+    'password' => bcrypt('your-secure-password'),
+    'is_admin' => true
 ]);
 exit
 ```
