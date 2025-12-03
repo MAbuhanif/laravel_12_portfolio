@@ -1,5 +1,6 @@
 import { Head, useForm } from '@inertiajs/react';
 import MainLayout from '@/Layouts/MainLayout';
+import ImageInput from '@/Components/ImageInput';
 
 export default function Create() {
     const { data, setData, post, processing, errors } = useForm({
@@ -80,16 +81,12 @@ export default function Create() {
                             </div>
 
                             <div>
-                                <label htmlFor="image" className="block text-sm font-medium text-gray-300">Image URL (Optional)</label>
-                                <input
-                                    id="image"
-                                    type="text"
-                                    value={data.image}
-                                    onChange={(e) => setData('image', e.target.value)}
-                                    className="mt-1 block w-full bg-dark-bg border-dark-border rounded-md shadow-sm text-white focus:border-primary-500 focus:ring-primary-500"
-                                    placeholder="https://example.com/image.jpg"
+                                <ImageInput
+                                    label="Project Image"
+                                    name="image"
+                                    error={errors.image}
+                                    onChange={(file) => setData('image', file)}
                                 />
-                                {errors.image && <div className="text-red-500 text-sm mt-1">{errors.image}</div>}
                             </div>
 
                             <div>

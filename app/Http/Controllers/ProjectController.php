@@ -35,12 +35,21 @@ class ProjectController extends Controller
             'slug' => 'required|string|unique:projects,slug',
             'description' => 'nullable|string',
             'tech_stack' => 'nullable|string',
-            'image' => 'nullable|string',
+            'image' => 'nullable|image|max:2048',
             'url' => 'nullable|url',
             'featured' => 'boolean',
         ]);
 
-        $request->user()->projects()->create($validated);
+        // Remove image from validated data since it will be handled by Media Library
+        unset($validated['image']);
+
+        $project = $request->user()->projects()->create($validated);
+
+        // Handle image upload using Media Library
+        if ($request->hasFile('image')) {
+            $project->addMediaFromRequest('image')
+                ->toMediaCollection('images');
+        }
 
         return redirect()->route('projects.index')->with('success', 'Project created successfully.');
     }
@@ -71,12 +80,23 @@ class ProjectController extends Controller
             'slug' => 'required|string|unique:projects,slug,' . $project->id,
             'description' => 'nullable|string',
             'tech_stack' => 'nullable|string',
-            'image' => 'nullable|string',
+            'image' => 'nullable|image|max:2048',
             'url' => 'nullable|url',
             'featured' => 'boolean',
         ]);
 
+        // Remove image from validated data since it will be handled by Media Library
+        unset($validated['image']);
+
         $project->update($validated);
+
+        // Handle image upload using Media Library
+        if ($request->hasFile('image')) {
+            // Clear old images and add new one
+            $project->clearMediaCollection('images');
+            $project->addMediaFromRequest('image')
+                ->toMediaCollection('images');
+        }
 
         return $project;
     }

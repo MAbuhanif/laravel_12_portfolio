@@ -32,12 +32,21 @@ class TeamMemberController extends Controller
             'project_id' => 'nullable|exists:projects,id',
             'name' => 'required|string|max:255',
             'role' => 'required|string|max:255',
-            'image' => 'nullable|string',
+            'image' => 'nullable|image|max:2048',
             'bio' => 'nullable|string',
             'social_links' => 'nullable|array',
         ]);
 
-        TeamMember::create($validated);
+        // Remove image from validated data since it will be handled by Media Library
+        unset($validated['image']);
+
+        $teamMember = TeamMember::create($validated);
+
+        // Handle image upload using Media Library
+        if ($request->hasFile('image')) {
+            $teamMember->addMediaFromRequest('image')
+                ->toMediaCollection('images');
+        }
 
         return redirect()->route('team-members.index')->with('success', 'Team member created successfully.');
     }
@@ -66,12 +75,23 @@ class TeamMemberController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'role' => 'required|string|max:255',
-            'image' => 'nullable|string',
+            'image' => 'nullable|image|max:2048',
             'bio' => 'nullable|string',
             'social_links' => 'nullable|array',
         ]);
 
+        // Remove image from validated data since it will be handled by Media Library
+        unset($validated['image']);
+
         $teamMember->update($validated);
+
+        // Handle image upload using Media Library
+        if ($request->hasFile('image')) {
+            // Clear old images and add new one
+            $teamMember->clearMediaCollection('images');
+            $teamMember->addMediaFromRequest('image')
+                ->toMediaCollection('images');
+        }
 
         return $teamMember;
     }
