@@ -48,7 +48,7 @@ class ProjectController extends Controller
         // Handle image upload using Media Library
         if ($request->hasFile('image')) {
             $project->addMediaFromRequest('image')
-                ->toMediaCollection('images');
+                ->toMediaCollection('projects');
         }
 
         return redirect()->route('projects.index')->with('success', 'Project created successfully.');
@@ -93,9 +93,9 @@ class ProjectController extends Controller
         // Handle image upload using Media Library
         if ($request->hasFile('image')) {
             // Clear old images and add new one
-            $project->clearMediaCollection('images');
+            $project->clearMediaCollection('projects');
             $project->addMediaFromRequest('image')
-                ->toMediaCollection('images');
+                ->toMediaCollection('projects');
         }
 
         return $project;

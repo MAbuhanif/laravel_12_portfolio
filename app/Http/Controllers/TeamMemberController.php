@@ -32,7 +32,7 @@ class TeamMemberController extends Controller
             'project_id' => 'nullable|exists:projects,id',
             'name' => 'required|string|max:255',
             'role' => 'required|string|max:255',
-            'image' => 'nullable|image|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'bio' => 'nullable|string',
             'social_links' => 'nullable|array',
         ]);

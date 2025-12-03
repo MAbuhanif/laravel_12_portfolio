@@ -50,8 +50,7 @@ export default function About({ teamMembers = [] }) {
                                     >
                                         <div className="w-24 h-24 mx-auto mb-6 rounded-full overflow-hidden border-2 border-primary-500/30">
                                             <img 
-                                                src={member.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=0ea5e9&color=fff`} 
-                                                alt={member.name}
+                                                src={member.image_url}
                                                 className="w-full h-full object-cover"
                                             />
                                         </div>

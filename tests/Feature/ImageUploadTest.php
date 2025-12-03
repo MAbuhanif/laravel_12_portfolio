@@ -31,8 +31,8 @@ class ImageUploadTest extends TestCase
         // Assert media was added to the project
         $project = \App\Models\Project::where('title', 'Test Project')->first();
         $this->assertNotNull($project);
-        $this->assertCount(1, $project->getMedia('images'));
-        $this->assertEquals('project.jpg', $project->getFirstMedia('images')->file_name);
+        $this->assertCount(1, $project->getMedia('projects'));
+        $this->assertEquals('project.jpg', $project->getFirstMedia('projects')->file_name);
     }
 
     public function test_admin_can_upload_team_member_image(): void
