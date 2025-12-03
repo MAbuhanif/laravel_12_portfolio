@@ -240,9 +240,9 @@ export default function Projects({ projects = [] }) {
                                 key={project.id}
                                 className="bg-dark-surface p-6 rounded-xl border border-dark-border hover:border-primary-500 transition-all group"
                             >
-                                {project.image_url && (
+                                {project.image && (
                                     <img
-                                        src={project.image_url}
+                                        src={project.image}
                                         alt={project.title}
                                         className="w-full h-48 object-cover rounded-lg mb-4"
                                     />
