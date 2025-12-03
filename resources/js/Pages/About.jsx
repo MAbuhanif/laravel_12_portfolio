@@ -49,7 +49,11 @@ export default function About({ teamMembers = [] }) {
                                         className="bg-dark-surface p-8 rounded-2xl border border-dark-border text-center hover:border-primary-500/50 transition-colors duration-300"
                                     >
                                         <div className="w-24 h-24 mx-auto mb-6 rounded-full overflow-hidden border-2 border-primary-500/30">
-                                            <img src={member.getFirstMediaUrl('images')} alt={member.name}/>
+                                            <img 
+                                                src={member.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=0ea5e9&color=fff`} 
+                                                alt={member.name}
+                                                className="w-full h-full object-cover"
+                                            />
                                         </div>
                                         <h3 className="text-xl font-bold text-white mb-2">{member.name}</h3>
                                         <p className="text-primary-400 font-medium mb-4">{member.role}</p>
