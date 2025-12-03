@@ -22,6 +22,13 @@ class TeamMember extends Model implements HasMedia
         'social_links' => 'array',
     ];
 
+    protected $appends = ['image_url'];
+
+    public function getImageUrlAttribute()
+    {
+        return $this->getFirstMediaUrl('images');
+    }
+
     public function project()
     {
         return $this->belongsTo(Project::class);

@@ -18,6 +18,13 @@ class Project extends Model implements HasMedia
         'featured' => 'boolean',
     ];
 
+    protected $appends = ['image_url'];
+
+    public function getImageUrlAttribute()
+    {
+        return $this->image ? \Illuminate\Support\Facades\Storage::url($this->image) : null;
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

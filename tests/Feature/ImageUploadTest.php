@@ -18,6 +18,8 @@ class ImageUploadTest extends TestCase
             'is_admin' => true,
         ]);
 
+        Storage::fake('public');
+
         $file = UploadedFile::fake()->image('project.jpg');
 
         $response = $this->actingAs($admin)->post(route('projects.store'), [
@@ -28,11 +30,14 @@ class ImageUploadTest extends TestCase
 
         $response->assertRedirect(route('projects.index'));
         
-        // Assert media was added to the project
-        $project = \App\Models\Project::where('title', 'Test Project')->first();
-        $this->assertNotNull($project);
-        $this->assertCount(1, $project->getMedia('images'));
-        $this->assertEquals('project.jpg', $project->getFirstMedia('images')->file_name);
+        // Assert file was stored
+        Storage::disk('public')->assertExists('projects/' . $file->hashName());
+        
+        // Assert database has image path
+        $this->assertDatabaseHas('projects', [
+            'title' => 'Test Project',
+            'image' => 'projects/' . $file->hashName(),
+        ]);
     }
 
     public function test_admin_can_upload_team_member_image(): void

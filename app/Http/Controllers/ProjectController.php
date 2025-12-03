@@ -75,7 +75,7 @@ class ProjectController extends Controller
             'slug' => 'required|string|unique:projects,slug,' . $project->id,
             'description' => 'nullable|string',
             'tech_stack' => 'nullable|string',
-            'image' => 'nullable|string',
+            'image' => 'nullable',
             'url' => 'nullable|url',
             'featured' => 'boolean',
         ]);
