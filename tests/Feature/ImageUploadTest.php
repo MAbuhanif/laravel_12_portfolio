@@ -14,11 +14,11 @@ class ImageUploadTest extends TestCase
 
     public function test_admin_can_upload_project_image(): void
     {
+        Storage::fake('public');
+
         $admin = User::factory()->create([
             'is_admin' => true,
         ]);
-
-        Storage::fake('public');
 
         $file = UploadedFile::fake()->image('project.jpg');
 
